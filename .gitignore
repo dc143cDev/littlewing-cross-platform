@@ -42,6 +42,7 @@ windows/
 ios/
 ltwcp.iml
 pubspec.lock
+!pubspec.yaml
 
 # web
 web/firebase-config.js
