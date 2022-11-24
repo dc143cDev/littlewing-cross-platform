@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:ltwcp/palette.dart';
 
-import '../controllers/login_controller.dart';
+import '../../../../palette.dart';
 
-class LoginView extends GetView<LoginController> {
-  const LoginView({Key? key}) : super(key: key);
+class SignupView extends GetView {
+  const SignupView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: britishRacingGreen,
+      backgroundColor: primaryLight,
       body: Container(
         padding: EdgeInsets.all(50),
         child: Center(
@@ -19,16 +18,14 @@ class LoginView extends GetView<LoginController> {
               SizedBox(
                 height: 120,
               ),
-              LtwL(),
+              LtwS(),
               SizedBox(
                 height: 30,
               ),
-              LineL(),
+              LineS(),
               SizedBox(
                 height: 30,
               ),
-              TextFormField(),
-              TextFormField(),
             ],
           ),
         ),
@@ -37,8 +34,8 @@ class LoginView extends GetView<LoginController> {
   }
 }
 
-//리틀윙 텍스트 로고 로그인 화면용
-class LtwL extends StatelessWidget {
+//리틀윙 텍스트 로고 사인업용
+class LtwS extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
@@ -46,15 +43,15 @@ class LtwL extends StatelessWidget {
       style: TextStyle(
         fontFamily: 'LS',
         fontWeight: FontWeight.w800,
-        color: primaryLight,
+        color: britishRacingGreen,
         fontSize: 60,
       ),
     );
   }
 }
 
-//라인 그래픽 화이트
-class LineL extends StatelessWidget {
+//라인 그래픽 BRG
+class LineS extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -63,7 +60,7 @@ class LineL extends StatelessWidget {
           width: 6,
         ),
         Container(
-          color: primaryLight,
+          color: britishRacingGreen,
           width: 120,
           height: 3,
         ),
@@ -71,7 +68,7 @@ class LineL extends StatelessWidget {
           width: 10,
         ),
         Container(
-          color: primaryLight,
+          color: britishRacingGreen,
           width: 15,
           height: 3,
         ),
@@ -79,7 +76,7 @@ class LineL extends StatelessWidget {
           width: 10,
         ),
         Container(
-          color: primaryLight,
+          color: britishRacingGreen,
           width: 120,
           height: 3,
         ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:ltwcp/app/modules/login/views/login_view.dart';
+import 'package:ltwcp/app/modules/login/views/signup_view.dart';
 
 import '../controllers/home_controller.dart';
 
@@ -14,9 +16,20 @@ class HomeView extends GetView<HomeController> {
         centerTitle: true,
       ),
       body: Center(
-        child: Text(
-          'HomeView is working',
-          style: TextStyle(fontSize: 20),
+        child: Column(
+          children: [
+            FloatingActionButton(
+                heroTag: null,
+                child: Text('lg'),
+                onPressed: () {
+                  Get.to(LoginView());
+                }),
+            FloatingActionButton(
+                child: Text('si'),
+                onPressed: () {
+                  Get.to(SignupView());
+                }),
+          ],
         ),
       ),
     );
