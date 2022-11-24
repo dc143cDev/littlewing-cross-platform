@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ltwcp/app/modules/login/views/login_view.dart';
 import 'package:ltwcp/app/modules/login/views/signup_view.dart';
+import 'package:ltwcp/palette.dart';
 
 import '../controllers/home_controller.dart';
 
@@ -12,24 +13,17 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('HomeView'),
-        centerTitle: true,
+        backgroundColor: primaryLight,
+        title: Ltw(),
+        centerTitle: false,
+        elevation: 0,
       ),
-      body: Center(
-        child: Column(
-          children: [
-            FloatingActionButton(
-                heroTag: null,
-                child: Text('lg'),
-                onPressed: () {
-                  Get.to(LoginView());
-                }),
-            FloatingActionButton(
-                child: Text('si'),
-                onPressed: () {
-                  Get.to(SignupView());
-                }),
-          ],
+      body: Container(
+        color: primaryLight,
+        child: Center(
+          child: Column(
+            children: [],
+          ),
         ),
       ),
     );

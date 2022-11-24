@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,7 +15,9 @@ void main() async {
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Application",
-      initialRoute: AppPages.INITIAL,
+      //이니셜 라우트 유저 상태 감지하여 네비게이션
+      initialRoute:
+          FirebaseAuth.instance.currentUser == null ? '/login' : '/home',
       getPages: AppPages.routes,
     ),
   );

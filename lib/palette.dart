@@ -37,3 +37,18 @@ darkTextEng() {
     color: primaryLight,
   );
 }
+
+class Ltw extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      'Little Wing',
+      style: TextStyle(
+        fontFamily: 'LS',
+        fontWeight: FontWeight.w800,
+        color: britishRacingGreen,
+        fontSize: 30,
+      ),
+    );
+  }
+}

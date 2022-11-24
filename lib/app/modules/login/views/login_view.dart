@@ -1,35 +1,145 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:ltwcp/app/modules/login/controllers/auth_controller.dart';
+import 'package:ltwcp/app/modules/login/views/signup_view.dart';
 import 'package:ltwcp/palette.dart';
 
+import '../../home/views/home_view.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
-  const LoginView({Key? key}) : super(key: key);
+  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: britishRacingGreen,
-      body: Container(
-        padding: EdgeInsets.all(50),
-        child: Center(
-          child: Column(
-            children: [
-              SizedBox(
-                height: 120,
-              ),
-              LtwL(),
-              SizedBox(
-                height: 30,
-              ),
-              LineL(),
-              SizedBox(
-                height: 30,
-              ),
-              TextFormField(),
-              TextFormField(),
-            ],
+      body: Form(
+        key: _formKey,
+        child: Container(
+          padding: EdgeInsets.all(40),
+          child: Center(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 120,
+                ),
+                //텍스트 로고
+                LtwL(),
+                SizedBox(
+                  height: 30,
+                ),
+                LineL(),
+                SizedBox(
+                  height: 40,
+                ),
+                //이메일
+                TextFormField(
+                  validator: (String? value) {
+                    if (value!.isEmpty) {
+                      return 'Please Enter email';
+                    }
+                    return null;
+                  },
+                  controller: emailController,
+                  keyboardType: TextInputType.emailAddress,
+                  style: TextStyle(
+                    fontFamily: 'JS',
+                    color: britishRacingGreen,
+                  ),
+                  decoration: InputDecoration(
+                    hintStyle: TextStyle(color: britishRacingGreen),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(50.0),
+                      ),
+                    ),
+                    fillColor: primaryLight,
+                    filled: true,
+                    contentPadding: EdgeInsets.only(top: 14.0),
+                    prefixIcon: Icon(
+                      Icons.email,
+                      color: britishRacingGreen,
+                    ),
+                    hintText: 'Enter your Email',
+                  ),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                //비밀번호
+                TextFormField(
+                  validator: (String? value) {
+                    if (value!.isEmpty) {
+                      return 'Please Enter password';
+                    }
+                    return null;
+                  },
+                  controller: passwordController,
+                  style: TextStyle(
+                    fontFamily: 'JS',
+                    color: britishRacingGreen,
+                  ),
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    hintStyle: TextStyle(color: britishRacingGreen),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(50.0),
+                      ),
+                    ),
+                    fillColor: primaryLight,
+                    filled: true,
+                    contentPadding: EdgeInsets.only(top: 14.0),
+                    prefixIcon: Icon(
+                      Icons.lock,
+                      color: britishRacingGreen,
+                    ),
+                    hintText: 'Enter your Password',
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                //로그인 버튼
+                TextButton(
+                  onPressed: () {
+                    AuthController.instance.signIn(
+                      emailController.text.trim(),
+                      passwordController.text.trim(),
+                    );
+                  },
+                  child: Text(
+                    'Login',
+                    style: TextStyle(
+                      fontFamily: 'JS',
+                      color: primaryLight,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                //OR
+                Text(
+                  '- OR -',
+                  style: TextStyle(
+                    fontFamily: 'JS',
+                    color: primaryLight,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                goSignin(),
+              ],
+            ),
           ),
         ),
       ),
@@ -47,7 +157,7 @@ class LtwL extends StatelessWidget {
         fontFamily: 'LS',
         fontWeight: FontWeight.w800,
         color: primaryLight,
-        fontSize: 60,
+        fontSize: 65,
       ),
     );
   }
@@ -60,11 +170,11 @@ class LineL extends StatelessWidget {
     return Row(
       children: [
         SizedBox(
-          width: 6,
+          width: 5,
         ),
         Container(
           color: primaryLight,
-          width: 120,
+          width: 132,
           height: 3,
         ),
         SizedBox(
@@ -80,10 +190,60 @@ class LineL extends StatelessWidget {
         ),
         Container(
           color: primaryLight,
-          width: 120,
+          width: 132,
           height: 3,
         ),
       ],
+    );
+  }
+}
+
+//Create Account
+class goSignin extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      onPressed: () {
+        Get.to(
+          () => SignupView(),
+          transition: Transition.downToUp,
+          duration: Duration(milliseconds: 500),
+        );
+      },
+      child: Text(
+        'Create Account',
+        style: TextStyle(
+          fontFamily: 'JS',
+          color: primaryLight,
+          fontWeight: FontWeight.w800,
+          fontSize: 18,
+        ),
+      ),
+    );
+  }
+}
+
+//Login
+class goLogin extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      onPressed: () {
+        Get.to(
+          () => HomeView(),
+          transition: Transition.downToUp,
+          duration: Duration(milliseconds: 500),
+        );
+      },
+      child: Text(
+        'Login',
+        style: TextStyle(
+          fontFamily: 'JS',
+          color: primaryLight,
+          fontWeight: FontWeight.w800,
+          fontSize: 18,
+        ),
+      ),
     );
   }
 }
