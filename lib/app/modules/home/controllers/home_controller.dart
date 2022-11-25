@@ -21,3 +21,13 @@ class HomeController extends GetxController {
 
   void increment() => count.value++;
 }
+
+// List<Widget> ResponsiveAppbar(BuildContext context) {
+//   if (selectedIndex == 0) {
+//     return marketAction;
+//   } else if (selectedIndex == 1) {
+//     return bandAction;
+//   } else if (selectedIndex == 2) {
+//     return myPageAction;
+//   }
+// }
