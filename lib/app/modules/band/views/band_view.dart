@@ -15,12 +15,7 @@ class BandView extends GetView<BandController> {
         title: Ltw(),
         centerTitle: false,
         elevation: 0,
-        actions: [
-          FloatingActionButton(
-            onPressed: () {},
-            child: Text('2'),
-          )
-        ],
+        actions: [],
       ),
       body: Center(
         child: Text(

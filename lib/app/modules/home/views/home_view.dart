@@ -25,6 +25,13 @@ class _HomeViewState extends State<HomeView> {
     return Scaffold(
       backgroundColor: primaryLight,
       bottomNavigationBar: BottomNavigationBar(
+        selectedFontSize: 18,
+        selectedLabelStyle:
+            TextStyle(fontFamily: 'JS', fontWeight: FontWeight.w700),
+        unselectedLabelStyle:
+            TextStyle(fontFamily: 'JS', fontWeight: FontWeight.w300),
+        selectedItemColor: britishRacingGreen,
+        backgroundColor: primaryLight,
         currentIndex: selectedIndex,
         onTap: (int index) {
           setState(() {

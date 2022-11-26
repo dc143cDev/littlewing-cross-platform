@@ -15,7 +15,7 @@ class MarketView extends GetView<MarketController> {
         title: Ltw(),
         centerTitle: false,
         elevation: 0,
-        actions: [FloatingActionButton(onPressed: () {})],
+        actions: [],
       ),
       body: Center(
         child: Text(
