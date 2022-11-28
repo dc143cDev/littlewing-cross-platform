@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ltwcp/app/modules/login/views/desktop_login_view.dart';
 import 'package:ltwcp/app/modules/market/views/desktop_market_view.dart';
+import 'package:ltwcp/app/modules/market/views/item_add_view.dart';
 import 'package:ltwcp/app/modules/market/views/tag_view.dart';
 import '../../../../palette.dart';
 import '../../../../reponsive.dart';
@@ -24,6 +25,14 @@ class _MarketViewState extends State<MarketView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        heroTag: null,
+        backgroundColor: britishRacingGreen,
+        child: Icon(Icons.add),
+        onPressed: () {
+          Get.to(ItemAddView(), transition: Transition.downToUp);
+        },
+      ),
       backgroundColor: primaryLight,
       appBar: AppBar(
         backgroundColor: primaryLight,
