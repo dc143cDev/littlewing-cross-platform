@@ -1,8 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ltwcp/app/modules/login/views/desktop_login_view.dart';
+import 'package:ltwcp/app/modules/market/views/desktop_market_view.dart';
 import 'package:ltwcp/app/modules/market/views/tag_view.dart';
 import '../../../../palette.dart';
+import '../../../../reponsive.dart';
 import '../../search/views/search_view.dart';
 
 class MarketView extends StatefulWidget {
@@ -21,6 +24,7 @@ class _MarketViewState extends State<MarketView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: primaryLight,
       appBar: AppBar(
         backgroundColor: primaryLight,
         title: Ltw(),
@@ -48,51 +52,116 @@ class _MarketViewState extends State<MarketView> {
               onPressed: () {
                 Get.to(TagView());
               }),
+          SizedBox(
+            width: 20,
+          ),
         ],
       ),
-      body: Container(
-        color: primaryLight,
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              //스트림 빌더로 파이어스토어 db를 감지. 스냅샷의 값에 맞는 데이터를 가져옴.
-              StreamBuilder(
-                stream: product.snapshots(),
-                builder: (BuildContext context,
-                    AsyncSnapshot<QuerySnapshot> streamSnapshot) {
-                  //데이터를 가지고 있을 시, 리턴해주는 위젯에 데이터를 표기.
-                  if (streamSnapshot.hasData) {
-                    return Container(
-                      height: 240,
-                      width: 70,
-                      child: ListView.builder(
-                        //docs의 갯수 값을 찾아와서 뿌려주기에, 데이터가 널 값이면 안됨.
-                        itemCount: streamSnapshot.data!.docs.length,
-                        itemBuilder: (context, index) {
-                          final DocumentSnapshot documentSnapshot =
-                              streamSnapshot.data!.docs[index];
-                          return Card(
-                            child: ListTile(
-                              title: Text(documentSnapshot['brand']),
-                            ),
-                          );
-                        },
-                      ),
-                    );
-                  } else {
-                    //아니라면, 프로그레스 인디케이터 표시.
-                    return Center(
-                      child: CircularProgressIndicator(
-                        color: britishRacingGreen,
-                      ),
-                    );
-                  }
-                },
-              ),
-            ],
-          ),
-        ),
-      ),
+      body: Responsive.isDesktop(context)
+          ? DesktopMarketView()
+          : StreamBuilder(
+              stream: product.snapshots(),
+              builder: (BuildContext context,
+                  AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+                //데이터를 가지고 있을 시, 리턴해주는 위젯에 데이터를 표기.
+                if (streamSnapshot.hasData) {
+                  return ListView.builder(
+                    //docs의 갯수 값을 찾아와서 뿌려주기에, 데이터가 널 값이면 안됨.
+                    itemCount: streamSnapshot.data!.docs.length,
+                    itemBuilder: (context, index) {
+                      final DocumentSnapshot documentSnapshot =
+                          streamSnapshot.data!.docs[index];
+                      return Container(
+                        height: 150,
+                        child: Card(
+                          color: primaryLight,
+                          elevation: 10,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16.0),
+                          ),
+                          margin: EdgeInsets.only(
+                              left: 16, right: 16, top: 8, bottom: 8),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                flex: 33,
+                                child: Image(
+                                  height: 120,
+                                  image: NetworkImage(
+                                      documentSnapshot['imageUrl']),
+                                ),
+                              ),
+                              Expanded(
+                                flex: 66,
+                                child: Column(
+                                  children: [
+                                    Expanded(
+                                      flex: 50,
+                                      child: Center(
+                                        child: Text(
+                                          documentSnapshot['price'],
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w800,
+                                            fontFamily: 'JS',
+                                            fontSize: 20,
+                                            color: britishRacingGreen,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 25,
+                                      child: Text(
+                                        documentSnapshot['brand'],
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w800,
+                                          fontFamily: 'JS',
+                                          fontSize: 18,
+                                          color: primaryDark,
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 25,
+                                      child: Text(
+                                        documentSnapshot['model'],
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w800,
+                                          fontFamily: 'JS',
+                                          fontSize: 18,
+                                          color: primaryDark,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                // child: ListTile(
+                                //   title: Text(documentSnapshot['brand']),
+                                //   subtitle: Text(documentSnapshot['model']),
+                                //   trailing: SizedBox(
+                                //     width: 90,
+                                //     child: Text(
+                                //       documentSnapshot['price'],
+                                //     ),
+                                //   ),
+                                // ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                } else {
+                  //아니라면, 프로그레스 인디케이터 표시.
+                  return Center(
+                    child: CircularProgressIndicator(
+                      color: britishRacingGreen,
+                    ),
+                  );
+                }
+              },
+            ),
     );
   }
 }

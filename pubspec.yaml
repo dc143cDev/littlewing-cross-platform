@@ -19,7 +19,9 @@ dev_dependencies:
     sdk: flutter
   pedantic: ^1.11.1
 
-flutter: 
+flutter:
+  assets:
+    - assets/images/
   uses-material-design: true
   fonts:
     - family: LS
