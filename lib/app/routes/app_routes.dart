@@ -8,6 +8,7 @@ abstract class Routes {
   static const MARKET = _Paths.MARKET;
   static const BAND = _Paths.BAND;
   static const MY = _Paths.MY;
+  static const SEARCH = _Paths.SEARCH;
 }
 
 abstract class _Paths {
@@ -17,4 +18,5 @@ abstract class _Paths {
   static const MARKET = '/market';
   static const BAND = '/band';
   static const MY = '/my';
+  static const SEARCH = '/search';
 }

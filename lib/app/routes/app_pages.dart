@@ -10,6 +10,8 @@ import '../modules/market/bindings/market_binding.dart';
 import '../modules/market/views/market_view.dart';
 import '../modules/my/bindings/my_binding.dart';
 import '../modules/my/views/my_view.dart';
+import '../modules/search/bindings/search_binding.dart';
+import '../modules/search/views/search_view.dart';
 
 part 'app_routes.dart';
 
@@ -43,6 +45,11 @@ class AppPages {
       name: _Paths.MY,
       page: () => const MyView(),
       binding: MyBinding(),
+    ),
+    GetPage(
+      name: _Paths.SEARCH,
+      page: () => const SearchView(),
+      binding: SearchBinding(),
     ),
   ];
 }
