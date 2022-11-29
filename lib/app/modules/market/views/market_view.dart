@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ltwcp/app/modules/login/controllers/auth_controller.dart';
 import 'package:ltwcp/app/modules/login/views/desktop_login_view.dart';
 import 'package:ltwcp/app/modules/market/views/desktop_market_view.dart';
 import 'package:ltwcp/app/modules/market/views/item_add_view.dart';
@@ -22,6 +24,10 @@ class _MarketViewState extends State<MarketView> {
 
   final PageController pageController = PageController();
 
+  final ref = FirebaseStorage.instance.ref('product').list(
+        ListOptions(maxResults: 20),
+      );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +36,7 @@ class _MarketViewState extends State<MarketView> {
         backgroundColor: britishRacingGreen,
         child: Icon(Icons.add),
         onPressed: () {
-          Get.to(ItemAddView(), transition: Transition.downToUp);
+          AuthController().logOut();
         },
       ),
       backgroundColor: primaryLight,
